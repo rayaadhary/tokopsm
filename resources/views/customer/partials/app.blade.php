@@ -33,7 +33,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="{{route('customer.home')}}"><img src="img/logo.png" alt=""></a>
+            <a href="{{route('customer.home')}}"><img style="width: 80px; height: 80px;" src="{{asset('customer/img/hero/header_logo.png')}}" alt=""></a>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>

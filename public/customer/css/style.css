@@ -728,9 +728,15 @@ ol {
 
 .hero__item {
     height: 431px;
-    display: flex;
-    align-items: center;
-    padding-left: 75px;
+    position: relative;
+}
+
+.hero__item .d-flex {
+    height: 100%; /* Membuat d-flex memenuhi tinggi hero__item */
+    position: absolute; /* Posisi absolut untuk centering */
+    top: 50%; /* 50% dari tinggi */
+    left: 50%; /* 50% dari lebar */
+    transform: translate(-50%, -50%); /* Menggeser kembali ke tengah */
 }
 
 .hero__text span {

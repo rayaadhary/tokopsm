@@ -24,15 +24,16 @@
                      </div>
                  </div>
                  <div class="col-lg-9">
-                     <div class="hero__item set-bg" data-setbg="{{ asset('customer/img/hero/banner.jpg') }}">
-                         <div class="hero__text">
-                             <span>FRUIT FRESH</span>
-                             <h2>Vegetable <br />100% Organic</h2>
-                             <p>Free Pickup and Delivery Available</p>
-                             <a href="{{ route('customer.shop') }}" class="primary-btn">SHOP NOW</a>
-                         </div>
-                     </div>
-                 </div>
+                    <div class="hero__item set-bg" data-setbg="{{ asset('customer/img/hero/hero_section.png') }}">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <div class="text-center">
+                                <h2>PUTRA SUBUR MAKMUR</h2>
+                                <p class="" style="color: #1e1e1e;">Furniture Store</p>
+                                <a href="{{ route('customer.shop') }}" class="primary-btn">SHOP NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
              </div>
          </div>
      </section>
