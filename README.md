@@ -47,6 +47,10 @@ lakukan pembuatan database, lalu migrate untuk memasukan table dan akun admin
 php artisan migrate --seed
 ```
 
+```bash
+php artisan storage:link
+```
+
 jalankan website
 ```bash
 php artisan serve
@@ -56,5 +60,5 @@ lakukan login dengan username dan password
 
 ```bash
 adminadmin
-password
+adminadmin
 ```
