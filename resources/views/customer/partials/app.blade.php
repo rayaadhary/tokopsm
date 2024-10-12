@@ -31,7 +31,24 @@
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
-
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="{{route('customer.home')}}"><img src="img/logo.png" alt=""></a>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="{{ request()->is('/') ? 'active' : '' }}"><a
+                    href="{{ route('customer.home') }}">Home</a></li>
+            <li class="{{ request()->is('shop*') ? 'active' : '' }}"> <a
+                    href="{{ route('customer.shop') }}">Shop</a>
+            </li>
+            <li class="{{ request()->is('contact*') ? 'active' : '' }}"> <a
+                    href="{{ route('customer.contact') }}">Contact</a>
+            </li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+    </div>
 
     <!-- Header Section Begin -->
     @include('customer.partials.navbar')
