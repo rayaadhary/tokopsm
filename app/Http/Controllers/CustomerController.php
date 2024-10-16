@@ -61,36 +61,41 @@ class CustomerController extends Controller
         $sort = $request->input('sort');
         $categorySlug = $request->input('category');
 
-        $category = null;
-
-        if ($categorySlug) {
-            $category = Category::where('slug', $categorySlug)->first();
-        }
+        $category = $categorySlug ? Category::where('slug', $categorySlug)->first() : null;
 
         $products = Product::with(['category', 'images'])
             ->when($search, function ($query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%' . $search . '%');
             })
             ->when($category, function ($query) use ($category) {
-                return $query->where('category_id', $category->id);
+                $query->where('category_id', $category->id);
             });
 
-        if ($sort === 'name_asc') {
-            $products->orderBy('name', 'asc');
-        } elseif ($sort === 'name_desc') {
-            $products->orderBy('name', 'desc');
-        } elseif ($sort === 'price_asc') {
-            $products->orderBy('price', 'asc');
-        } elseif ($sort === 'price_desc') {
-            $products->orderBy('price', 'desc');
-        } else {
-            $products->latest();
+        // Sorting logic
+        switch ($sort) {
+            case 'name_asc':
+                $products->orderBy('name', 'asc');
+                break;
+            case 'name_desc':
+                $products->orderBy('name', 'desc');
+                break;
+            case 'price_asc':
+                $products->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $products->orderBy('price', 'desc');
+                break;
+            default:
+                $products->latest();
+                break;
         }
 
-        $products = $products->paginate(12);
+        $products = $products->paginate(12)->appends($request->all());
 
         return view('customer.product.shop', compact('products', 'categories'));
     }
+
+
 
     public function shopDetail(Product $product)
     {
