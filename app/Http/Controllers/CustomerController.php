@@ -71,7 +71,6 @@ class CustomerController extends Controller
                 $query->where('category_id', $category->id);
             });
 
-        // Sorting logic
         switch ($sort) {
             case 'name_asc':
                 $products->orderBy('name', 'asc');
