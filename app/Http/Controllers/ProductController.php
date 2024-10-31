@@ -81,8 +81,11 @@ class ProductController extends Controller
             return response()->json(['error' => 'Produk tidak ditemukan.'], 404);
         }
 
-        if ($request->hasFile('images')) {
+        if (!Storage::disk('public')->exists('products')) {
             Storage::disk('public')->makeDirectory('products');
+        }
+
+        if ($request->hasFile('images')) {
 
             foreach ($request->file('images') as $image) {
                 $img = Image::read($image->getPathname());

@@ -97,7 +97,6 @@
     {{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
     <script>
         $(document).ready(function() {
             $('#price').on('keyup', function() {
@@ -146,6 +145,7 @@
             paramName: 'images[]', // Nama input untuk file
             maxFilesize: 10, // Ukuran maksimum file 10 MB
             maxFiles: 5, // Maksimal 5 file
+            parallelUploads: 10,
             acceptedFiles: ".jpeg,.jpg,.png", // Hanya file gambar yang diterima
             autoProcessQueue: false, // Nonaktifkan pengunggahan otomatis
             addRemoveLinks: true, // Tambahkan tautan hapus file
@@ -181,7 +181,6 @@
                     }
 
                 });
-
 
                 $('#submit-button').click(function(e) {
                     e.preventDefault();

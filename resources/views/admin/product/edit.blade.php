@@ -75,7 +75,7 @@
                                 <div class="col-sm-10">
                                     <div class="d-flex flex-wrap">
                                         @foreach ($product->images as $image)
-                                            <div class="position-relative m-2">
+                                            <div class="position-relative m-2 image-container">
                                                 <img src="{{ asset('storage/' . $image->image) }}" class="img-thumbnail"
                                                     style="width: 150px; height: 150px;">
                                                 <button type="button"
@@ -157,6 +157,23 @@
 
     <script>
         function removeImage(imageId) {
+            // Ambil elemen gambar dan hitung total gambar yang tersisa
+            const imageElements = document.querySelectorAll(
+            '.image-container'); // Sesuaikan selector ini dengan elemen gambar Anda
+            const totalImages = imageElements.length;
+
+            // Cek jika gambar yang akan dihapus adalah gambar terakhir
+            if (totalImages <= 1) {
+                // Tampilkan SweetAlert jika hanya ada satu gambar tersisa
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan!',
+                    text: 'Anda tidak bisa menghapus gambar terakhir.',
+                    confirmButtonText: 'OK'
+                });
+                return; // Hentikan fungsi jika gambar terakhir
+            }
+
             // Tambahkan ID gambar yang akan dihapus ke input hidden
             let deletedImagesInput = document.getElementById('deleted_images');
             let deletedImages = deletedImagesInput.value ? deletedImagesInput.value.split(',') : [];
@@ -164,9 +181,13 @@
             deletedImagesInput.value = deletedImages.join(',');
 
             // Menghapus elemen gambar dari tampilan
-            document.querySelector(`button[onclick="removeImage('${imageId}')"]`).parentElement.remove();
+            const button = document.querySelector(`button[onclick="removeImage('${imageId}')"]`);
+            if (button) {
+                button.parentElement.remove();
+            }
         }
     </script>
+
 
     <script>
         // Inisialisasi Dropzone dengan benar
@@ -178,7 +199,8 @@
             method: "post",
             paramName: 'images[]', // Nama input untuk file
             maxFilesize: 10, // Ukuran maksimum file 10 MB
-            maxFiles: 5, // Maksimal 5 file
+            maxFiles: 5,
+            parallelUploads: 10, // Maksimal 5 file
             acceptedFiles: ".jpeg,.jpg,.png", // Hanya file gambar yang diterima
             autoProcessQueue: false, // Nonaktifkan pengunggahan otomatis
             addRemoveLinks: true, // Tambahkan tautan hapus file
