@@ -82,6 +82,8 @@ class ProductController extends Controller
         }
 
         if ($request->hasFile('images')) {
+            Storage::disk('public')->makeDirectory('products');
+
             foreach ($request->file('images') as $image) {
                 $img = Image::read($image->getPathname());
 
